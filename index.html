@@ -1,224 +1,431 @@
-<!DOCTYPE html>
-<html lang="en"><head>
-    <title>pyinfra - Fast Python Infrastructure Automation & Configuration Management Tool</title>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>pyinfra — agentless infrastructure automation, in plain Python</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="pyinfra runs commands over SSH against thousands of hosts in seconds. No DSL. No YAML. No agents. Just Python.">
+<meta name="author" content="pyinfra">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#00d060">
+<link rel="canonical" href="https://pyinfra.com">
 
-    <meta charset="utf-8" />
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <meta http-equiv="Content-Language" content="en" />
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://pyinfra.com">
+<meta property="og:title" content="pyinfra — agentless infrastructure automation, in plain Python">
+<meta property="og:description" content="pyinfra runs commands over SSH against thousands of hosts in seconds. No DSL. No YAML. No agents. Just Python.">
+<meta property="og:image" content="https://pyinfra.com/static/logo_readme.png">
+<meta property="og:site_name" content="pyinfra">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://pyinfra.com">
+<meta name="twitter:title" content="pyinfra — agentless infrastructure automation, in plain Python">
+<meta name="twitter:description" content="pyinfra runs commands over SSH against thousands of hosts in seconds. No DSL. No YAML. No agents. Just Python.">
+<meta name="twitter:image" content="https://pyinfra.com/static/logo_readme.png">
 
-    <meta name="description" content="pyinfra is a fast, Python-based infrastructure automation and configuration management tool. Deploy to SSH servers, Docker containers, and local machines. 10x faster than Ansible with declarative operations." />
-    <meta name="keywords" content="pyinfra, python infrastructure automation, configuration management, DevOps automation, infrastructure as code, IaC, server provisioning, deployment automation, ansible alternative, python devops, SSH automation, docker automation, terraform integration, agentless automation, infrastructure deployment, IT automation, server configuration, declarative infrastructure, python configuration management, fast deployment tool" />
-    <meta name="author" content="pyinfra">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://pyinfra.com">
+<link rel="icon" type="image/png" href="static/logo.png">
+<link rel="apple-touch-icon" href="static/logo.png">
+<link rel="preload" href="static/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preconnect" href="https://stats.oxygem.com">
+<link rel="dns-prefetch" href="https://stats.oxygem.com">
+<link rel="stylesheet" href="static/style.css">
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://pyinfra.com" />
-    <meta property="og:title" content="pyinfra - Fast Python Infrastructure Automation Tool" />
-    <meta property="og:description" content="Fast, Python-based infrastructure automation. Deploy to SSH servers, Docker, and local machines. 10x faster than Ansible." />
-    <meta property="og:image" content="https://pyinfra.com/static/logo_readme.png" />
-    <meta property="og:site_name" content="pyinfra">
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://pyinfra.com">
-    <meta name="twitter:title" content="pyinfra - Fast Python Infrastructure Automation Tool">
-    <meta name="twitter:description" content="Fast, Python-based infrastructure automation. Deploy to SSH servers, Docker, and local machines. 10x faster than Ansible.">
-    <meta name="twitter:image" content="https://pyinfra.com/static/logo_readme.png">
-
-    <!-- Preconnect for performance -->
-    <link rel="preconnect" href="https://stats.oxygem.com">
-    <link rel="dns-prefetch" href="https://stats.oxygem.com">
-
-    <!-- Stylesheets -->
-    <link rel="stylesheet" type="text/css" href="static/github.css">
-    <link rel="stylesheet" type="text/css" href="static/pyinfra.css">
-
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="static/logo_small.png" type="image/x-icon">
-    <link rel="icon" href="static/logo_small.png" type="image/x-icon">
-    <link rel="apple-touch-icon" href="static/logo_small.png">
-
-    <!-- Structured Data for SEO -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "pyinfra",
-      "applicationCategory": "DeveloperApplication",
-      "operatingSystem": "Linux, macOS, Windows",
-      "description": "Fast Python-based infrastructure automation and configuration management tool for deploying to SSH servers, Docker containers, and local machines.",
-      "url": "https://pyinfra.com",
-      "image": "https://pyinfra.com/static/logo_readme.png",
-      "softwareVersion": "3.x",
-      "author": {
-        "@type": "Organization",
-        "name": "pyinfra",
-        "url": "https://pyinfra.com"
-      },
-      "programmingLanguage": "Python"
-    }
-    </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "pyinfra",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Linux, macOS, Windows",
+  "description": "Fast Python-based infrastructure automation and configuration management tool for deploying to SSH servers, Docker containers, and local machines.",
+  "url": "https://pyinfra.com",
+  "image": "https://pyinfra.com/static/logo_readme.png",
+  "softwareVersion": "3.x",
+  "author": {
+    "@type": "Organization",
+    "name": "pyinfra",
+    "url": "https://pyinfra.com"
+  },
+  "programmingLanguage": "Python"
+}
+</script>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="logo-wrapper">
-                <img src="static/logo_readme.png" alt="pyinfra - Python Infrastructure Automation Tool Logo" width="100%">
-            </div>
-            <nav role="navigation" aria-label="Main navigation">
-            </nav>
-        </div>
-    </header>
 
-<section id="content">
-    <div class="container">
-        <div id="markup">
-            <article id="content" class="markdown-body">
-                <h1 class="visually-hidden">pyinfra - Python Infrastructure Automation</h1>
-                <p class="big hero-text">pyinfra turns Python code into shell commands and runs them on your servers. Execute ad-hoc commands and write declarative operations. Target SSH servers, local machine and Docker containers. Fast and scales from one server to thousands.</p>
-                <p class="big comparison-text">Think <code>ansible</code> but Python instead of YAML, and <strong>up to 10x faster</strong>.</p>
-            </article>
-        </div>
+<header class="nav">
+  <div class="container nav__inner">
+    <a class="brand-mark" href="/">
+      <img src="static/logo.png" alt="pyinfra logo" width="30" height="30">
+      <span class="home">~/pyinfra</span>
+    </a>
+    <nav class="nav__links">
+      <a href="https://docs.pyinfra.com"><span>/</span>docs</a>
+      <a href="https://github.com/pyinfra-dev/pyinfra"><span>/</span>github</a>
+    </nav>
+    <div class="nav__cta">
+      <a class="stars" href="https://github.com/pyinfra-dev/pyinfra" aria-label="GitHub stars: over 5,700"><span class="star" aria-hidden="true">★</span> <span aria-hidden="true">&gt;5.7k</span></a>
+      <a class="btn-pill" href="https://docs.pyinfra.com/page/getting-started.html">$ quickstart →</a>
     </div>
-    <div class="container">
-        <div>
-            <h2 class="features-heading">Why Choose pyinfra?</h2>
-            <article class="markdown-body">
-                <ul class="features">
-                <li><strong><i aria-hidden="true">🚀</i> Super Fast Execution</strong> Deploy to thousands of targets with predictable performance. Up to 10x faster than Ansible.</li>
-                <li><strong><i aria-hidden="true">🚨</i> Instant Debugging</strong> Get realtime output from shell commands with no abstraction layer for immediate troubleshooting.</li>
-                <li><strong><i aria-hidden="true">🔄</i> Declarative Operations</strong> Only make changes when needed with built-in diff checking and idempotent operations.</li>
-                <li><strong><i aria-hidden="true">📦</i> Fully Extendable</strong> Leverage the entire Python package ecosystem. Write inventory and operations in pure Python.</li>
-                <li><strong><i aria-hidden="true">💻</i> Agentless Architecture</strong> Deploy to any system with POSIX shell access. Zero dependencies on target systems.</li>
-                <li><strong><i aria-hidden="true">🔌</i> Seamless Integration</strong> Pull inventory from Terraform, execute against Docker containers, integrate with your DevOps toolchain.</li>
-                </ul>
+  </div>
+</header>
 
-            </article>
-        </div>
-    </div>
+<section class="hero">
+  <div class="container hero__grid">
+    <div>
+      <div class="hero__pre" aria-hidden="true">┌─ pyinfra v3 ──────────────┐</div>
+      <h1><span aria-hidden="true">&gt; </span>automate<br><span class="green">thousands</span> of<br>servers<span class="green" aria-hidden="true">_</span></h1>
+      <p class="hero__lede">
+        pyinfra is a python-native, agentless automation tool that runs
+        commands over ssh — concurrently, idempotently, and
+        <strong>6× faster than ansible</strong>.
+      </p>
 
-    <div class="container buttons">
-        <a class="button" href="https://docs.pyinfra.com/page/getting-started.html" aria-label="Get started with pyinfra documentation">Getting Started</a>
-        <a class="button" href="https://github.com/pyinfra-dev/pyinfra-examples" aria-label="View pyinfra code examples on GitHub">Examples Repo</a>
-    </div>
+      <div class="install-box">
+        <span class="noselect prompt">$</span>
+        <span class="install-box__cmd">uv tool install pyinfra</span>
+        <button type="button" class="copy" data-copy-target=".install-box__cmd">copy</button>
+      </div>
 
-    <!-- Code Example Section -->
-    <div class="container-wide">
-        <div class="code-example-section">
-            <h2 class="features-heading">See It In Action</h2>
-            <p class="section-intro">Write infrastructure automation in pure Python. No YAML, no DSL, just Python code.</p>
+      <div class="tags">
+        <span>[mit license]</span>
+        <span>·</span>
+        <span>[python 3.10+]</span>
+        <span>·</span>
+        <span>[no agents]</span>
+        <span>·</span>
+        <span>[zero config]</span>
+      </div>
 
-            <div class="code-example-wrapper">
-                <div class="code-example">
-                    <div class="code-header">
-                        <span class="code-file">deploy.py</span>
-                    </div>
-                    <pre><code><span class="code-comment"># Install and configure nginx</span>
-<span class="code-keyword">from</span> pyinfra.operations <span class="code-keyword">import</span> apt, systemd
-
-apt.packages(
-    name=<span class="code-string">"Install nginx"</span>,
-    packages=[<span class="code-string">"nginx"</span>],
-)
-
-
-systemd.service(
-    name=<span class="code-string">"Restart and enable the nginx service"</span>,
-    service=<span class="code-string">"nginx.service"</span>,
-    running=<span class="code-string">True</span>,
-    restarted=<span class="code-string">True</span>,
-    enabled=<span class="code-string">True</span>,
-)
-</code></pre>
-                </div>
-                <div class="code-benefits">
-                    <h3>Simple, Powerful, Pythonic</h3>
-                    <ul>
-                        <li><strong>No new syntax to learn</strong> If you know Python, you know pyinfra.</li>
-                        <li><strong>Full Python capabilities</strong> Use loops, conditions, functions, and <em>any Python library</em>.</li>
-                        <li><strong>Type hints & IDE support</strong> Get autocomplete and inline documentation.</li>
-                        <li><strong>Instant feedback</strong> See exactly what commands run on your servers in real-time.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+      <div class="btn-row">
+        <a class="btn-ascii" href="https://docs.pyinfra.com">[ read the docs ]</a>
+        <a class="btn-ascii" href="https://github.com/pyinfra-dev/pyinfra">[ view on github ]</a>
+      </div>
     </div>
 
-    <!-- Community Section -->
-    <div class="container-wide">
-        <div class="community-section">
-            <h2 class="features-heading">Join the Community</h2>
-            <div class="community-grid">
-                <div class="community-card">
-                    <div class="community-icon">💬</div>
-                    <h3>Get Support</h3>
-                    <p>Join our active Matrix chat for help, discussions, and to connect with other pyinfra users and contributors.<br />&nbsp;</p>
-                    <a href="https://matrix.to/#/#pyinfra:matrix.org" class="community-link">Join Chat →</a>
-                </div>
-                <div class="community-card">
-                    <div class="community-icon">📚</div>
-                    <h3>Read the Docs</h3>
-                    <p>Comprehensive documentation with guides, API references, and examples to help you get started and master pyinfra.</p>
-                    <a href="https://docs.pyinfra.com" class="community-link">View Docs →</a>
-                </div>
-                <div class="community-card">
-                    <div class="community-icon">🤝</div>
-                    <h3>Contribute</h3>
-                    <p>pyinfra is open source and welcomes contributions. Report bugs, suggest features, or contribute code on GitHub.</p>
-                    <a href="https://github.com/pyinfra-dev/pyinfra" class="community-link">View on GitHub →</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Code window -->
+    <div class="window" id="hero-window">
+      <div class="window__tabs" role="tablist" aria-label="Code examples">
+        <button class="window__tab is-active" role="tab" id="tab-deploy" data-tab="deploy" aria-controls="pane-deploy" aria-selected="true" tabindex="0">deploy.py</button>
+        <button class="window__tab" role="tab" id="tab-inventory" data-tab="inventory" aria-controls="pane-inventory" aria-selected="false" tabindex="-1">inventory.py</button>
+        <button class="window__tab" role="tab" id="tab-output" data-tab="output" aria-controls="pane-output" aria-selected="false" tabindex="-1">output</button>
+      </div>
 
-    <!-- FAQ Section -->
-    <div class="container">
-        <div class="faq-section">
-            <h2 class="features-heading">Frequently Asked Questions</h2>
-            <div class="faq-grid">
-                <div class="faq-item">
-                    <h3>Is pyinfra production-ready?</h3>
-                    <p>Yes! pyinfra is battle-tested and used by companies worldwide to manage production infrastructure. It has a stable API and comprehensive test coverage.</p>
-                </div>
-                <div class="faq-item">
-                    <h3>Can I migrate from Ansible?</h3>
-                    <p>Absolutely. Many teams have successfully migrated from Ansible to pyinfra. The concepts are similar, but the Python-based approach offers more flexibility and better performance.</p>
-                </div>
-                <div class="faq-item">
-                    <h3>Does it work with Windows?</h3>
-                    <p>pyinfra targets POSIX-compatible systems. While you can run pyinfra from Windows (via WSL), target systems should be Linux, macOS, or Unix-based systems.</p>
-                </div>
-                <div class="faq-item">
-                    <h3>How does it handle secrets?</h3>
-                    <p>pyinfra integrates with popular secret management tools. You can use environment variables, encrypted files, or integrate with HashiCorp Vault, AWS Secrets Manager, etc.</p>
-                </div>
-                <div class="faq-item">
-                    <h3>Can I use existing Python packages?</h3>
-                    <p>Yes! That's one of pyinfra's biggest advantages. You can import and use any Python package in your deployment scripts, from requests to boto3 to custom libraries.</p>
-                </div>
-                <div class="faq-item">
-                    <h3>What's the performance overhead?</h3>
-                    <p>Minimal. pyinfra uses efficient SSH multiplexing and parallel execution. It can manage thousands of servers simultaneously with low resource usage and predictable performance.</p>
-                </div>
-            </div>
-        </div>
-    </div>
+      <pre class="code window__pane is-active" id="pane-deploy" role="tabpanel" aria-labelledby="tab-deploy" tabindex="0" data-pane="deploy">
+<span class="ln"><span class="gutter"> 1</span><span class="tok-comment"># deploy.py · 23 hosts</span></span>
+<span class="ln"><span class="gutter"> 2</span>&nbsp;</span>
+<span class="ln"><span class="gutter"> 3</span><span class="tok-kw">from</span>&nbsp;<span class="tok-mod">pyinfra.operations</span>&nbsp;<span class="tok-kw">import</span> apt, files, systemd</span>
+<span class="ln"><span class="gutter"> 4</span>&nbsp;</span>
+<span class="ln"><span class="gutter"> 5</span><span class="tok-fn">apt.packages</span>(</span>
+<span class="ln"><span class="gutter"> 6</span>    packages=[<span class="tok-str">"nginx"</span>, <span class="tok-str">"certbot"</span>],</span>
+<span class="ln"><span class="gutter"> 7</span>    update=<span class="tok-kw">True</span>,</span>
+<span class="ln"><span class="gutter"> 8</span>)</span>
+<span class="ln"><span class="gutter"> 9</span>&nbsp;</span>
+<span class="ln"><span class="gutter">10</span><span class="tok-fn">files.template</span>(</span>
+<span class="ln"><span class="gutter">11</span>    src=<span class="tok-str">"templates/nginx.conf.j2"</span>,</span>
+<span class="ln"><span class="gutter">12</span>    dest=<span class="tok-str">"/etc/nginx/sites-enabled/api"</span>,</span>
+<span class="ln"><span class="gutter">13</span>)</span>
+<span class="ln"><span class="gutter">14</span>&nbsp;</span>
+<span class="ln"><span class="gutter">15</span><span class="tok-fn">systemd.service</span>(<span class="tok-str">"nginx"</span>, reloaded=<span class="tok-kw">True</span>)</span>
+</pre>
 
-    <div class="container buttons">
-        <a class="button" href="https://docs.pyinfra.com/page/getting-started.html" aria-label="Get started with pyinfra documentation">Getting Started</a>
-        <a class="button" href="https://github.com/pyinfra-dev/pyinfra-examples" aria-label="View pyinfra code examples on GitHub">Examples Repo</a>
+      <pre class="code window__pane" id="pane-inventory" role="tabpanel" aria-labelledby="tab-inventory" tabindex="0" data-pane="inventory">
+<span class="ln"><span class="gutter"> 1</span><span class="tok-comment"># inventory.py · groups + hosts</span></span>
+<span class="ln"><span class="gutter"> 2</span>&nbsp;</span>
+<span class="ln"><span class="gutter"> 3</span>web = [</span>
+<span class="ln"><span class="gutter"> 4</span>    (<span class="tok-str">"web-01.prod"</span>, {<span class="tok-str">"role"</span>: <span class="tok-str">"edge"</span>}),</span>
+<span class="ln"><span class="gutter"> 5</span>    (<span class="tok-str">"web-02.prod"</span>, {<span class="tok-str">"role"</span>: <span class="tok-str">"edge"</span>}),</span>
+<span class="ln"><span class="gutter"> 6</span>    *[(<span class="tok-fn">f</span><span class="tok-str">"web-{i:02}.prod"</span>, {}) <span class="tok-kw">for</span> i <span class="tok-kw">in</span> <span class="tok-fn">range</span>(3, 24)],</span>
+<span class="ln"><span class="gutter"> 7</span>]</span>
+<span class="ln"><span class="gutter"> 8</span>&nbsp;</span>
+<span class="ln"><span class="gutter"> 9</span>db = [</span>
+<span class="ln"><span class="gutter">10</span>    (<span class="tok-str">"db-01.prod"</span>, {<span class="tok-str">"role"</span>: <span class="tok-str">"primary"</span>}),</span>
+<span class="ln"><span class="gutter">11</span>    (<span class="tok-str">"db-02.prod"</span>, {<span class="tok-str">"role"</span>: <span class="tok-str">"replica"</span>}),</span>
+<span class="ln"><span class="gutter">12</span>]</span>
+<span class="ln"><span class="gutter">13</span>&nbsp;</span>
+<span class="ln"><span class="gutter">14</span><span class="tok-comment"># $ pyinfra inventory.py deploy.py --limit web</span></span>
+<span class="ln"><span class="gutter">15</span><span class="tok-comment"># → 23 hosts targeted</span></span>
+</pre>
+
+      <pre class="code window__pane window__pane--term" id="pane-output" role="tabpanel" aria-labelledby="tab-output" tabindex="0" data-pane="output">
+<span class="ln"><span class="muted">$ pyinfra inventory.py deploy.py --limit web</span></span>
+<span class="ln">&nbsp;</span>
+<span class="ln">--&gt; Loading inventory…</span>
+<span class="ln"><span class="muted">    Hosts: web-01..web-23</span></span>
+<span class="ln">&nbsp;</span>
+<span class="ln">--&gt; Gathering facts (concurrent)…</span>
+<span class="ln"><span class="muted">    23 hosts · 0.6s</span></span>
+<span class="ln">&nbsp;</span>
+<span class="ln">--&gt; Running deploy.py…</span>
+<span class="ln"><span class="good">    ✓ web-01.prod   3 ops   changed=2   0.42s</span></span>
+<span class="ln"><span class="good">    ✓ web-02.prod   3 ops   changed=2   0.39s</span></span>
+<span class="ln"><span class="warn">    ⟳ web-03.prod   running…  apt.packages</span></span>
+<span class="ln">&nbsp;</span>
+<span class="ln">--&gt; Summary</span>
+<span class="ln"><span class="good">    successful: 23   changed: 18   failed: 0   total: 2.1s</span></span>
+</pre>
+
+      <div class="status-bar">
+        <span data-status-left>NORMAL  deploy.py  python</span>
+        <span data-status-right>23 hosts ready  ·  --dry  ·  17:42</span>
+      </div>
     </div>
+  </div>
 </section>
 
-<footer role="contentinfo">
-    <div class="container">
-        <p class="footer-text">Open source infrastructure automation for developers who love Python. Licensed under MIT.</p>
+<section class="output">
+  <div class="container output__grid">
+    <div>
+      <div class="section-eyebrow">// streaming output</div>
+      <h2>See what changes,<br><span style="color:var(--brand)">before it changes.</span></h2>
+      <p>
+        Run with <strong>--dry</strong> for a per-host diff of every operation pyinfra
+        would perform. Run for real and watch results stream back in parallel.
+      </p>
     </div>
+    <div class="terminal">
+      <div class="window__head-row">
+        <span>bash · zsh · ~/ops</span>
+        <span><span class="live-dot">●</span> live</span>
+      </div>
+      <pre class="terminal__body">
+<span class="muted">$ pyinfra inventory.py deploy.py --limit web</span>
+&nbsp;
+<div>--&gt; Loading inventory…</div>
+<span class="muted">    Hosts: web-01..web-24, db-01..db-04</span>
+&nbsp;
+<div>--&gt; Gathering facts (concurrent)…</div>
+<span class="muted">    24 hosts · 0.6s</span>
+&nbsp;
+<div>--&gt; Running deploy.py…</div>
+<span class="good">    ✓ web-01.prod   3 ops    changed=2   0.42s</span>
+<span class="good">    ✓ web-02.prod   3 ops    changed=2   0.39s</span>
+<span class="good">    ✓ web-03.prod   3 ops    changed=0   0.18s</span>
+<span class="good">    ✓ web-04.prod   3 ops    changed=2   0.44s</span>
+<span class="warn">    ⟳ web-05.prod   running…  apt.packages</span>
+<span class="muted">    … 19 more</span>
+&nbsp;
+<div>--&gt; Summary</div>
+<span class="good">    successful: 24   changed: 18   no-change: 6   failed: 0</span>
+<span class="good">    total: 2.1s</span>
+</pre>
+    </div>
+  </div>
+</section>
+
+<section class="pillars">
+  <div class="container">
+    <div class="pillars__head">
+      <div class="section-eyebrow">// features</div>
+      <h2>Why pyinfra <span class="green">in six points.</span></h2>
+    </div>
+    <div class="pillar-grid">
+
+      <article class="pillar">
+        <div class="pillar__def"><span class="kw">def</span> <span class="name">pure</span>():</div>
+        <h3>Just Python</h3>
+        <p>No yaml. No jinja-in-yaml. Real control flow. Your editor already understands it.</p>
+      </article>
+
+      <article class="pillar">
+        <div class="pillar__def"><span class="kw">def</span> <span class="name">fast</span>():</div>
+        <h3>Concurrent ssh</h3>
+        <p>6× faster than ansible on identical workloads. Built on gevent + SSH.</p>
+      </article>
+
+      <article class="pillar">
+        <div class="pillar__def"><span class="kw">def</span> <span class="name">safe</span>():</div>
+        <h3>Diff before apply</h3>
+        <p>Run --dry to preview every change. Operations are idempotent — re-runs are no-ops.</p>
+      </article>
+
+      <article class="pillar">
+        <div class="pillar__def"><span class="kw">def</span> <span class="name">small</span>():</div>
+        <h3>0 agents</h3>
+        <p>Only requirement on hosts: a shell and ssh. No daemons. No state files. No control plane.</p>
+      </article>
+
+      <article class="pillar">
+        <div class="pillar__def"><span class="kw">def</span> <span class="name">big</span>():</div>
+        <h3>Scale-ready</h3>
+        <p>Works on 1 host or 10,000. Parallel execution, realtime streaming output.</p>
+      </article>
+
+      <article class="pillar">
+        <div class="pillar__def"><span class="kw">def</span> <span class="name">open</span>():</div>
+        <h3>Hackable</h3>
+        <p>Custom operation in 10 lines. Connect to anything that speaks a shell — docker, lxc, k8s.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="diff">
+  <div class="container">
+    <div class="section-eyebrow">// vs ansible</div>
+    <h2>$ diff ansible/ pyinfra/</h2>
+
+    <div class="diff__grid">
+      <div class="code-card">
+        <div class="code-card__head">
+          <span>--- ansible/playbook.yml</span>
+          <span>16 lines</span>
+        </div>
+<pre class="code-card__body">- hosts: web
+  tasks:
+    - name: install nginx
+      apt:
+        name: nginx
+        update_cache: yes
+    - name: render config
+      template:
+        src: nginx.conf.j2
+        dest: /etc/nginx/sites-enabled/api
+      notify: reload nginx
+  handlers:
+    - name: reload nginx
+      service:
+        name: nginx
+        state: reloaded</pre>
+      </div>
+
+      <div class="code-card code-card--good">
+        <div class="code-card__head">
+          <span>+++ pyinfra/deploy.py</span>
+          <span>8 lines</span>
+        </div>
+<pre class="code-card__body"><span class="tok-kw">from</span> <span class="tok-mod">pyinfra.operations</span> <span class="tok-kw">import</span> apt, files, systemd
+
+<span class="tok-fn">apt.packages</span>([<span class="tok-str">"nginx"</span>], update=<span class="tok-kw">True</span>)
+
+cfg = <span class="tok-fn">files.template</span>(
+    src=<span class="tok-str">"nginx.conf.j2"</span>,
+    dest=<span class="tok-str">"/etc/nginx/sites-enabled/api"</span>,
+)
+<span class="tok-kw">if</span> cfg.will_change:
+    <span class="tok-fn">systemd.service</span>(<span class="tok-str">"nginx"</span>, reloaded=<span class="tok-kw">True</span>)</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="manifest">
+  <div class="container">
+    <div class="section-eyebrow">// manifesto</div>
+    <div class="manifest__grid">
+      <div>
+        <div class="manifest__no">#01</div>
+        <div class="manifest__h">Code &gt; config</div>
+        <div class="manifest__b">A loop is just a loop. Stop encoding control flow into yaml.</div>
+      </div>
+      <div>
+        <div class="manifest__no">#02</div>
+        <div class="manifest__h">Show, then do</div>
+        <div class="manifest__b">Diff first. Apply second. Surprise nobody.</div>
+      </div>
+      <div>
+        <div class="manifest__no">#03</div>
+        <div class="manifest__h">Stay out of the way</div>
+        <div class="manifest__b">No agent. No state file. No control plane. SSH and go.</div>
+      </div>
+      <div>
+        <div class="manifest__no">#04</div>
+        <div class="manifest__h">Read like english</div>
+        <div class="manifest__b">Operations are nouns and verbs. apt.packages. files.template. systemd.service.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="companies">
+  <div class="container">
+    <div class="section-eyebrow">// 180+ contributors</div>
+    <div class="companies__head">
+      Thank you to hundreds open source contributors from companies and institutes all over...
+    </div>
+    <div class="companies__grid">
+      <div class="company"><span class="company__no" aria-hidden="true">01</span>SAP</div>
+      <div class="company"><span class="company__no" aria-hidden="true">02</span>EPAM Systems</div>
+      <div class="company"><span class="company__no" aria-hidden="true">03</span>Lawrence Livermore</div>
+      <div class="company"><span class="company__no" aria-hidden="true">04</span>Utrecht University</div>
+      <div class="company"><span class="company__no" aria-hidden="true">05</span>Odoo</div>
+      <div class="company"><span class="company__no" aria-hidden="true">06</span>Rochester Inst. of Tech.</div>
+      <div class="company"><span class="company__no" aria-hidden="true">07</span>Linköping University</div>
+      <div class="company"><span class="company__no" aria-hidden="true">08</span>Paul Scherrer Institute</div>
+      <div class="company"><span class="company__no" aria-hidden="true">09</span>Iress</div>
+      <div class="company"><span class="company__no" aria-hidden="true">10</span>NPR</div>
+      <div class="company"><span class="company__no" aria-hidden="true">11</span>Fox-IT</div>
+      <div class="company"><span class="company__no" aria-hidden="true">12</span>Prezi</div>
+      <div class="company"><span class="company__no" aria-hidden="true">13</span>Sensorfact</div>
+      <div class="company"><span class="company__no" aria-hidden="true">14</span>EDITED</div>
+      <div class="company"><span class="company__no" aria-hidden="true">15</span>Cynerio</div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <div class="cta__eyebrow"># ready when you are</div>
+    <div class="cta__logo"><img src="static/logo.png" alt="" width="56" height="56"></div>
+    <h2><span class="noselect">$ </span>uv tool install pyinfra<span class="noselect green">_</span></h2>
+    <p>Read the 5-minute quickstart. Deploy your first host today. Replace your ansible repo next quarter.</p>
+    <div class="cta__btns">
+      <a class="btn-brand" href="https://docs.pyinfra.com/page/getting-started.html">[ quickstart → ]</a>
+      <a class="btn-outline" href="https://github.com/pyinfra-dev/pyinfra">[ github  ↗  ]</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">
+          <img src="static/logo.png" alt="" width="24" height="24">
+          <span>~/pyinfra</span>
+        </div>
+        <div class="footer__tag">mit licensed · python 3.10+</div>
+      </div>
+
+      <div class="footer__col">
+        <div class="footer__col-h">/docs</div>
+        <ul>
+          <li><a href="https://docs.pyinfra.com/page/getting-started.html">quickstart</a></li>
+          <li><a href="https://docs.pyinfra.com/page/operations.html">operations</a></li>
+          <li><a href="https://docs.pyinfra.com/page/connectors.html">connectors</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <div class="footer__col-h">/community</div>
+        <ul>
+          <li><a href="https://github.com/pyinfra-dev/pyinfra">github</a></li>
+          <li><a href="https://matrix.to/#/#pyinfra:matrix.org">matrix chat</a></li>
+          <li><a href="https://github.com/pyinfra-dev/pyinfra/discussions">discussions</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <div class="footer__col-h">/meta</div>
+        <ul>
+          <li><a href="https://github.com/pyinfra-dev/pyinfra/blob/3.x/LICENSE.md">mit license</a></li>
+          <li><a href="https://github.com/pyinfra-dev/pyinfra/blob/3.x/CHANGELOG.md">changelog</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__base">
+      <span>&copy; 2015–2026 · pyinfra and contributors</span>
+      <span><span class="live">●</span> all systems operational</span>
+    </div>
+  </div>
 </footer>
 
+<script src="static/script.js" defer></script>
+
 <script async defer data-domain="pyinfra.com" src="https://stats.oxygem.com/js/index.js"></script>
-</body></html>
+
+</body>
+</html>

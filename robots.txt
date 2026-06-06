@@ -3,3 +3,4 @@
 User-agent: *
 Allow: /
 
+Sitemap: https://pyinfra.com/sitemap.xml
